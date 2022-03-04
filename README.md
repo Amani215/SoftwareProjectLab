@@ -73,10 +73,10 @@ If you need to check the controls for the game you can check the Help screen at 
 
 ## Contributors and Credits
 
-- Samer Bahri
-- Mehdi Moazami
-- Mohamed Rehaoulia
-- Fedi Zerai
+- Samer Bahri : https://github.com/samerbahri98
+- Mehdi Moazami : https://github.com/MehdiMoazami
+- Mohamed Rehaoulia : https://github.com/Rehaoulia
+- Fedi Zarai : https://github.com/fedizarai
 
 _________
 ### Good Luck and Have Fun! 
