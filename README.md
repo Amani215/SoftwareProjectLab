@@ -1,4 +1,4 @@
-![alt text](assets/Interface/StartScreen/BackgroundHeader.png)
+![ScreenShot](assets/Interface/StartScreen/BackgroundHeader.png)
 
 # Asteroid Miner 3D Game
 
@@ -52,19 +52,18 @@ A settler can do one operation in a single move. There are several operations, l
 
 Each asteroid contains some type of mineral and has a some number layers that are visible on the bottom right of the screen. These layers are labeled as radius. Depth tells you how many layers you have drilled.
 
-![alt text](assets/Interface/Screenshots/Asteroid.png)
-![alt text](assets/Interface/Screenshots/AsteroidZoomed.png)
+![ScreenShot](assets/Interface/Screenshots/Asteroid.png)
+![ScreenShot](assets/Interface/Screenshots/AsteroidZoomed.png)
 
 There are some dangers lurking in the asteroid belt. When a fully drilled asteroid with a radioactive core is at perihelion, the asteroid explodes and kills any settler on it. Radioactive material, therefore, can only be mined when the asteroid is at aphelion. 
 
 Sometimes a sun storm reaches the asteroid belt, and it is also dangerous to the settlers. A settler can only survive a sun storm if they hide in the core of a hollow asteroid. This, of course, is only possible if the mantle has been drilled through.
 
-![Demo CountPages alpha](assets/Interface/Screenshots/gameplayVideo.gif)
+<img src="assets/Interface/Screenshots/gameplayVideo.gif?raw=true">
 
 Using up 2 units of iron, a single unit of water ice and a single unit of uranium, the settlers can build a pair of teleportation-gates. The gates can be later deployed in the vicinity of the asteroid the settler is on. The two gates of a pair remain in contact for good, and entering either the traveller (settler, robot, etc) will be immediately transported to the other. The settler can bring the freshly built gates with themselves, but at the same time a single settler can only bring two gates. 
 
-![Demo CountPages alpha](assets/Interface/Screenshots/TeleportationGateVideo.gif)
-
+<img src="assets/Interface/Screenshots/TeleportationGateVideo.gif?raw=true">
 **Note:** At the start ofthe game the players will find that they already have enough materials for creating the gate. This is just because we kept the game in test mode.
 
 The game can end in two ways. If all the settlers die, the players lose. If, however, they can mine at least three units of each resource and they collect those materials on a single asteroid, they can build the space station and the players win the game.
