@@ -2,8 +2,7 @@ package CoreClasses;
 
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Spatial;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Asteroid extends Place {
 
@@ -15,19 +14,19 @@ public class Asteroid extends Place {
 	private boolean isDestroyed;
 
 	private int ID;
-	private List<TeleportationGate> gates;
-        private Geometry model;
+	private ArrayList<TeleportationGate> gates = new ArrayList<TeleportationGate>();
+	private Geometry model;
 	private Mineral mineral;
 	private int depth;
 	private SpaceStation station;
-        
+        private TeleportationGate gate ;
 
 	public int radius;
 
 	// need to have location aswell
-	public Asteroid(int _ID,Vector3f loc , Mineral _mineral, int _radius) {
+	public Asteroid(int _ID, Vector3f loc, Mineral _mineral, int _radius) {
 		super(loc);
-                ID = _ID;
+		ID = _ID;
 		mineral = _mineral;
 		isHollow = false;
 		isMineable = false;
@@ -35,19 +34,14 @@ public class Asteroid extends Place {
 		isDestroyed = false;
 		depth = 0;
 		radius = _radius;
-                
-                
-		if (mineral.toString().equals("Uranium"))
-			isRadioActive = true;
-		else
-			isRadioActive = false;
+                isRadioActive = mineral.getClass().getSimpleName().equals("Uranium");
 		// isAphelion = ??; we need location to set this
 
 	}
 
-	public Asteroid(int _ID,Vector3f loc , int _radius) { // this constructor works without mineral and sets hollow
+	public Asteroid(int _ID, Vector3f loc, int _radius) { // this constructor works without mineral and sets hollow
 		super(loc);
-                ID = _ID;
+		ID = _ID;
 		isHollow = true;
 		isMineable = false;
 		isBeingDrilled = false;
@@ -55,26 +49,64 @@ public class Asteroid extends Place {
 		isRadioActive = false;
 		depth = 0;
 		radius = _radius;
-                //model.setLocalScale(_radius);
+		// model.setLocalScale(_radius);
+	}
+
+	// need to have location aswell
+	public Asteroid(int _ID, Mineral _mineral, int _radius) {
+		ID = _ID;
+		mineral = _mineral;
+		isHollow = false;
+		isMineable = false;
+		isDestroyed = false;
+		depth = 0;
+		radius = _radius;
+                isRadioActive = mineral.getClass().getSimpleName().equals("Uranium");
+	}
+
+	public Asteroid(int _ID, int _radius) { // this constructor works without mineral and sets hollow
+		ID = _ID;
+		isHollow = true;
+		isMineable = false;
+		isDestroyed = false;
+		isRadioActive = false;
+		depth = 0;
+		radius = _radius;
+		// model.setLocalScale(_radius);
+
+	}
+
+	public void setModel(Geometry mod) {
+		mod.setLocalTranslation(super.getLocation());
+
+		model = mod;
 	}
         
-        public void setModel(Geometry mod){
-            mod.setLocalTranslation(super.getLocation());
+        public void removeModel(){
+            model.removeFromParent();
             
-            model = mod ;
-        }
-        
-        public Geometry getModel(){
-            model.setLocalTranslation(super.getLocation());
-           return model.clone() ;
         }
 
+	public Geometry getModel() {
+		model.setLocalTranslation(super.getLocation());
+		return model.clone();
+	}
+        
+        	public Geometry getModelNotCloned() {
+		return model;
+	}
 
 	public int getID() {
 		return ID;
 	}
-        
 
+        public void setCloseGate(TeleportationGate tg){
+        gate = tg;
+        }
+        public TeleportationGate getCloseGate(){
+          return gate;
+        }
+        
 	public boolean hollow() {
 		return isHollow;
 	}
@@ -100,7 +132,6 @@ public class Asteroid extends Place {
 	{ // this function returns -1 if its mineable
 
 		if (drillable() && !isDestroyed) {
-			isBeingDrilled = true;
 			depth++;
 			if (!isHollow && !drillable())
 				isMineable = true;
@@ -109,7 +140,6 @@ public class Asteroid extends Place {
 			if (isRadioActive && isPerihelion)
 				explode(); // if its radioactive then its not hollow
 			else {
-				isBeingDrilled = false;
 				if (!isHollow)
 					isMineable = true;
 			}
@@ -139,14 +169,9 @@ public class Asteroid extends Place {
 			return false;
 	}
 
-	public List<TeleportationGate> getGates() {
+	public ArrayList<TeleportationGate> getGates() {
 		return gates;
 	}
-        
-        @Override
-        public Vector3f getLocation(){
-            return super.getLocation();
-        }
 
 	public void setGates(TeleportationGate nGate) {
 		gates.add(nGate);
@@ -167,8 +192,9 @@ public class Asteroid extends Place {
 		} else
 			return false;
 	}
-	
+
 	public void getUnhide() {
+                if(!drillable() && !isMineable && !isDestroyed)
 		isHollow = true;
 	}
 
@@ -178,18 +204,30 @@ public class Asteroid extends Place {
 
 	private void explode() {
 		isDestroyed = true;
-		// animation();
 	}
 
 	public boolean destroyed() {
 		return isDestroyed;
 	}
 
+	public void setHollow(boolean hollow) {
+		isHollow = hollow;
+	}
+
+	public void setPerihelion(boolean perihelion) {
+		isPerihelion = perihelion;
+	}
+
 	public String viewInfo() {
-		String str = "Radius: " + this.radius + "\t\tDepth:" + depth + "\t\tHollow: " + Boolean.toString(isHollow)
-				+ "\nDrillable: " + Boolean.toString(drillable()) + "\t\tMineable :" + Boolean.toString(isMineable);
+
+		String str = "Asteroid: " + this.ID + "\nRadius: " + this.radius + "\nDepth:" + depth + "\nHollow: "
+				+ Boolean.toString(isHollow) + "\nDrillable: " + Boolean.toString(drillable()) + "\nMineable :"
+				+ Boolean.toString(isMineable)
+                        ;
 		return str;
 	}
 
-	// public getLocation() {}
+	public void setDepth(int radius2) {
+		this.depth = radius2;
+	}
 }
