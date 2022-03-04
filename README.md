@@ -1,5 +1,4 @@
 ![ScreenShot](assets/Interface/StartScreen/BackgroundHeader.png)
-
 # Asteroid Miner 3D Game
 
 ## Motivation
